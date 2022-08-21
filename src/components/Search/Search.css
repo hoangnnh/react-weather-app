@@ -1,0 +1,22 @@
+.Search {
+  display: flex;
+}
+
+.Search input[type="text"] {
+  font-family: inherit;
+  outline: none;
+  /* border: none; */
+  font-size: 1.5rem;
+  padding: 2px 5px;
+  flex: 2;
+}
+
+.Search button {
+  border: none;
+  width: 42px;
+  height: auto;
+}
+
+.Search button[type="button"] {
+  background: red  
+}
