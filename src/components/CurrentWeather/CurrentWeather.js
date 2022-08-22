@@ -1,48 +1,47 @@
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCloud } from "@fortawesome/free-solid-svg-icons";
 
 import "./CurrentWeather.css";
 
-const CurrentWeather = () => {
+const CurrentWeather = (props) => {
   return (
     <div className="CurrentWeather">
-      <h1 className="CurrentWeather__location">Avtovo, RU</h1>
-      <h2 className="CurrentWeather__time">Mon, Sep 21th</h2>
+      <h1 className="CurrentWeather__location">{props.data.location}</h1>
+      <h2 className="CurrentWeather__date">{props.data.time}</h2>
+      <h3 className="CurrentWeather__time">{props.data.date}</h3>
       <div className="CurrentWeather__columns">
         <div className="CurrentWeather__columns__left">
-          <FontAwesomeIcon className="weatherIcon" icon={faCloud} />
+          <img className="weatherImg" src={props.data.icon} alt={`${props.data.description}`} />
           <div className="CurrentWeather__columns__left__right">
-            <p className="temperature">13°</p>
-            <p className="weatherDescription">Overcast Clouds</p>
+            <p className="temperature">{props.data.temperature}°C</p>
+            <p className="weatherDescription">{props.data.description}</p>
           </div>
         </div>
         <div className="CurrentWeather__columns__right">
           <div className="CurrentWeather__columns__right__top row">
             <p className="feelsLike">
-              <strong>13.5°</strong>
+              <strong>{props.data.feelsLike}°C</strong>
               <small>Feels Like</small>
             </p>
             <p className="windSpeed">
-              <strong>6 m/s</strong>
+              <strong>{props.data.windSpeed} m/s</strong>
               <small>Wind</small>
             </p>
             <p className="sunriseAt">
-              <strong>03:42</strong>
+              <strong>{props.data.sunriseAt}</strong>
               <small>Sunrise</small>
             </p>
           </div>
           <div className="CurrentWeather__columns__right__bottom row">
             <p className="clouds">
-              <strong>100%</strong>
+              <strong>{props.data.clouds}%</strong>
               <small>Clouds</small>
             </p>
             <p className="pressure">
-              <strong>1008 mb</strong>
+              <strong>{props.data.pressure} mb</strong>
               <small>Pressure</small>
             </p>
             <p className="sunsetAt">
-              <strong>16:00</strong>
+              <strong>{props.data.sunsetAt}</strong>
               <small>Sunset</small>
             </p>
           </div>
