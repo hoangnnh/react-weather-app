@@ -1,0 +1,18 @@
+.WeatherForecast {
+  margin-top: 40px;
+  display: inline-grid;
+  grid-template-columns: repeat(6, auto);
+  grid-gap: 15px;
+}
+
+@media screen and (max-width: 1024px) {
+  .WeatherForecast {
+    grid-template-columns: repeat(3, auto);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .WeatherForecast {
+    grid-template-columns: repeat(2, auto);
+  }
+}

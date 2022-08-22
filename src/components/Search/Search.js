@@ -9,15 +9,18 @@ import "./Search.css";
 
 const Search = () => {
   return (
-    <form className="Search">
-      <button type="button">
-        <FontAwesomeIcon icon={faLocationCrosshairs} />
+    <>
+      <form className="Search">
+        <input type="text" placeholder="Search for a city, e.g. London" />
+        <button type="submit">
+          <FontAwesomeIcon icon={faMagnifyingGlass} />
+        </button>
+      </form>
+      <button id="getWeatherCurrentLocation" type="button">
+        <FontAwesomeIcon icon={faLocationCrosshairs} />{" "}
+        <span>Your Location</span>
       </button>
-      <input type="text" placeholder="e.g. London" />
-      <button type="submit">
-        <FontAwesomeIcon icon={faMagnifyingGlass} />
-      </button>
-    </form>
+    </>
   );
 };
 

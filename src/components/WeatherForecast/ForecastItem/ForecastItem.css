@@ -1,0 +1,22 @@
+.ForecastItem {
+  display: inline-block;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 0 40px;
+}
+
+.ForecastItem > * {
+  text-align: center;
+  color: var(--text-color);
+}
+
+.ForecastItem > h2 {
+  font-weight: 500;
+}
+
+.ForecastItem .weatherIcon {
+  font-size: 3.1rem;
+}
+
+.ForecastItem > p {
+  font-size: 1.3rem;
+}

@@ -1,0 +1,89 @@
+.CurrentWeather * {
+  color: var(--text-color);
+}
+
+.CurrentWeather {
+  text-align: start;
+}
+
+.CurrentWeather h1,
+.CurrentWeather h2 {
+  text-align: center;
+}
+
+.CurrentWeather__time {
+  font-weight: 400;
+  letter-spacing: 2px;
+}
+
+.CurrentWeather__columns {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.CurrentWeather__columns > div {
+  flex: 1;
+}
+
+.CurrentWeather__columns__left {
+  display: flex;
+  align-items: center;
+  border-right: 1px solid white;
+  padding-right: 35px;
+}
+
+.CurrentWeather__columns__left > * {
+  flex: 1;
+}
+
+.CurrentWeather__columns__left .weatherIcon {
+  font-size: 5.2rem;
+}
+
+.CurrentWeather__columns__left__right {
+  text-align: center;
+}
+
+.CurrentWeather__columns__left__right > p {
+  margin: 0;
+}
+
+.CurrentWeather__columns__left__right .temperature {
+  font-size: 5rem;
+}
+
+.CurrentWeather__columns__left__right .weatherDescription {
+  font-size: 2rem;
+}
+
+.CurrentWeather__columns__right,
+.CurrentWeather__columns__right p {
+  display: flex;
+  flex-direction: column;
+}
+
+.CurrentWeather__columns__right .row {
+  display: flex;
+  justify-content: space-around;
+}
+
+.CurrentWeather__columns__right .row > * {
+  flex: 1;
+  text-align: center;
+}
+
+@media screen and (max-width: 768px) {
+  .CurrentWeather__columns,
+  .CurrentWeather__columns__left {
+    flex-direction: column;
+  }
+
+  .CurrentWeather__columns__left {
+    border: none;
+  }
+
+  .CurrentWeather__columns__right {
+    width: 70%;
+  }
+}
