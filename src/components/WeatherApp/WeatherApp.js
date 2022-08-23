@@ -29,8 +29,6 @@ const WeatherApp = () => {
   const getWeatherCurrentLocation = async () => {
     const coords = await getMyLocationCoord();
 
-    console.log(coords)
-
     const currentWeather = await getCurrentWeatherByCoords(coords);
     const weatherForecast = await getWeatherForecastByCoords(coords);
 

@@ -13,6 +13,7 @@ const MONTHS = [
   "Nov",
   "Dec",
 ];
+const API_KEY = "886705b4c1182eb1c69f28eb8c520e20";
 
 export const convertDtFromOwmApiToDate = (dt) => {
   const time = new Date(dt * 1000);
@@ -37,8 +38,6 @@ export const convertDtFromOwmApiToTime = (dt) => {
 };
 
 export const getCurrentWeatherByCityName = async (location) => {
-  const API_KEY = "944534fe78e33f3befcc1764e9c8e402";
-
   const END_POINT = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${API_KEY}&units=metric`;
 
   const response = await fetch(END_POINT);
@@ -63,8 +62,6 @@ export const getCurrentWeatherByCityName = async (location) => {
 };
 
 export const getWeatherForecastByCityName = async (location) => {
-  const API_KEY = "944534fe78e33f3befcc1764e9c8e402";
-
   const END_POINT = `https://api.openweathermap.org/data/2.5/forecast?q=${location}&appid=${API_KEY}&units=metric&cnt=6`;
 
   const response = await fetch(END_POINT);
@@ -106,8 +103,6 @@ export const getMyLocationCoord = async () => {
 };
 
 export const getCurrentWeatherByCoords = async ({ lat, lon }) => {
-  const API_KEY = "944534fe78e33f3befcc1764e9c8e402";
-
   const END_POINT = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`;
 
   const response = await fetch(END_POINT);
@@ -132,8 +127,6 @@ export const getCurrentWeatherByCoords = async ({ lat, lon }) => {
 };
 
 export const getWeatherForecastByCoords = async ({ lat, lon }) => {
-  const API_KEY = "944534fe78e33f3befcc1764e9c8e402";
-
   const END_POINT = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric&cnt=6`;
 
   const response = await fetch(END_POINT);
