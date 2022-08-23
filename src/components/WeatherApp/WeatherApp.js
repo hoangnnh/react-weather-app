@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import {
-  convertDtFromOwmApiToDate,
-  convertDtFromOwmApiToTime,
+  getCurrentWeatherByCityName,
+  getCurrentWeatherByCoords,
+  getMyLocationCoord,
+  getWeatherForecastByCityName,
+  getWeatherForecastByCoords,
 } from "../../helpers";
 
 import CurrentWeather from "../CurrentWeather/CurrentWeather";
@@ -12,52 +15,40 @@ import "./WeatherApp.css";
 
 const WeatherApp = () => {
   const [location, setLocation] = useState("");
-  const [weatherData, setWeatherData] = useState({
-    current: {},
-    forecast: {},
-  });
-  const [isLoading, setIsLoading] = useState(true);
+  const [weatherData, setWeatherData] = useState(null);
 
-  const getWeatherByCityName = async (event) => {
+  const getWeatherData = async (event) => {
     event.preventDefault();
 
-    const END_POINT = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=944534fe78e33f3befcc1764e9c8e402&units=metric`;
+    const currentWeather = await getCurrentWeatherByCityName(location);
+    const weatherForecast = await getWeatherForecastByCityName(location);
 
-    const response = await fetch(END_POINT);
+    setWeatherData({ current: currentWeather, forecast: weatherForecast });
+  };
 
-    const data = await response.json();
+  const getWeatherCurrentLocation = async () => {
+    const coords = await getMyLocationCoord();
+
+    console.log(coords)
+
+    const currentWeather = await getCurrentWeatherByCoords(coords);
+    const weatherForecast = await getWeatherForecastByCoords(coords);
 
     setWeatherData({
-      current: {
-        clouds: data.clouds.all,
-        date: convertDtFromOwmApiToDate(data.dt),
-        description: data.weather[0].description,
-        feelsLike: Math.round(data.main.feels_like),
-        icon: `https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/${data.weather[0].icon}.svg`,
-        location: `${data.name}, ${data.sys.country}`,
-        pressure: data.main.pressure,
-        sunriseAt: convertDtFromOwmApiToTime(data.sys.sunrise),
-        sunsetAt: convertDtFromOwmApiToTime(data.sys.sunset),
-        temperature: Math.round(data.main.temp),
-        time: convertDtFromOwmApiToTime(data.dt),
-        windSpeed: data.wind.speed,
-      },
-      forecast: {},
+      current: currentWeather,
+      forecast: weatherForecast,
     });
   };
 
-  const getWeatherCurrentLocation = () => {};
-
-  // useEffect(() => {
-  //   getWeatherByCityName('Ho Chi Minh')
-  // }, []);
-
   useEffect(() => {
-    setIsLoading(false);
-  }, [weatherData]);
+    getWeatherCurrentLocation();
+  });
 
-  return isLoading ? (
-    <h1>Loading...</h1>
+  return weatherData === null ? (
+    <h3>
+      Refresh the page and enable Position permission for this page to continue
+      using
+    </h3>
   ) : (
     <>
       <h1>Weather App</h1>
@@ -66,11 +57,11 @@ const WeatherApp = () => {
         onChange={(event) => {
           setLocation(event.target.value);
         }}
-        onSubmit={getWeatherByCityName}
+        onSubmit={getWeatherData}
         onGetWeatherCurrentLocation={getWeatherCurrentLocation}
       />
       <CurrentWeather data={weatherData.current} />
-      <WeatherForecast />
+      <WeatherForecast data={weatherData.forecast} />
     </>
   );
 };

@@ -1,15 +1,14 @@
-import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCloudRain } from "@fortawesome/free-solid-svg-icons";
+import "./ForecastItem.css";
 
-import './ForecastItem.css'
-
-const ForecastItem = () => {
+const ForecastItem = (props) => {
   return (
     <div className="ForecastItem">
-      <h2 className="dayOfWeek">Mon</h2>
-      <FontAwesomeIcon className="weatherIcon" icon={faCloudRain} />
-      <p className="temperature">16°</p>
+      <h2 className="dayOfWeek">{props.data.day}</h2>
+      <p>
+        <strong className="time">{props.data.time}</strong>
+      </p>
+      <img src={props.data.icon} alt={props.data.description} />
+      <p className="temperature">{props.data.temperature}°C</p>
     </div>
   );
 };
