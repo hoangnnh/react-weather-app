@@ -13,7 +13,7 @@ const MONTHS = [
   "Nov",
   "Dec",
 ];
-const API_KEY = "886705b4c1182eb1c69f28eb8c520e20";
+const API_KEY = "08dbab0eeefe53317d2e0ad7c2a2e060";
 
 export const convertDtFromOwmApiToDate = (dt) => {
   const time = new Date(dt * 1000);
@@ -50,7 +50,7 @@ export const getCurrentWeatherByCityName = async (location) => {
     date: convertDtFromOwmApiToDate(data.dt),
     description: data.weather[0].description,
     feelsLike: Math.round(data.main.feels_like),
-    icon: `https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/${data.weather[0].icon}.svg`,
+    iconCode: data.weather[0].id,
     location: `${data.name}, ${data.sys.country}`,
     pressure: data.main.pressure,
     sunriseAt: convertDtFromOwmApiToTime(data.sys.sunrise),
@@ -75,7 +75,7 @@ export const getWeatherForecastByCityName = async (location) => {
       day: WEEK_DAYS[new Date(item.dt * 1000).getDay()],
       time: `${new Date(item.dt * 1000).getHours()}h`,
       temperature: Math.round(item.main.temp),
-      icon: `https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/${item.weather[0].icon}.svg`,
+      iconCode: item.weather[0].id,
       description: item.weather[0].description,
     });
   });
@@ -115,7 +115,7 @@ export const getCurrentWeatherByCoords = async ({ lat, lon }) => {
     date: convertDtFromOwmApiToDate(data.dt),
     description: data.weather[0].description,
     feelsLike: Math.round(data.main.feels_like),
-    icon: `https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/${data.weather[0].icon}.svg`,
+    iconCode: data.weather[0].id,
     location: `${data.name}, ${data.sys.country}`,
     pressure: data.main.pressure,
     sunriseAt: convertDtFromOwmApiToTime(data.sys.sunrise),
@@ -140,7 +140,7 @@ export const getWeatherForecastByCoords = async ({ lat, lon }) => {
       day: WEEK_DAYS[new Date(item.dt * 1000).getDay()],
       time: `${new Date(item.dt * 1000).getHours()}h`,
       temperature: Math.round(item.main.temp),
-      icon: `https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/${item.weather[0].icon}.svg`,
+      iconCode: item.weather[0].id,
       description: item.weather[0].description,
     });
   });

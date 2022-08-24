@@ -12,7 +12,6 @@
 }
 
 .CurrentWeather__date {
-  font-weight: 400;
   letter-spacing: 2px;
 }
 
@@ -30,6 +29,10 @@
   display: flex;
   align-items: center;
   border-right: 1px solid white;
+}
+
+.CurrentWeather__columns__left > .icon {
+  font-size: 5rem;
 }
 
 .CurrentWeather__columns__left > div {
@@ -50,6 +53,7 @@
 
 .CurrentWeather__columns__left__right .weatherDescription {
   font-size: 2rem;
+  text-transform: capitalize;
 }
 
 .CurrentWeather__columns__right,
@@ -74,6 +78,10 @@
   .CurrentWeather__columns__left {
     flex-direction: column;
   }
+
+.CurrentWeather__date {
+  text-align: center;
+}
 
   .CurrentWeather__columns__left {
     border: none;

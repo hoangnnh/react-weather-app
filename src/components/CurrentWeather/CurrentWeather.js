@@ -1,16 +1,19 @@
 import React from "react";
 
 import "./CurrentWeather.css";
+import "../../assets/weather-icons/css/weather-icons.min.css";
 
 const CurrentWeather = (props) => {
   return (
     <div className="CurrentWeather">
       <h1 className="CurrentWeather__location">{props.data.location}</h1>
-      <h2 className="CurrentWeather__date">{props.data.time}</h2>
-      <h3 className="CurrentWeather__time">{props.data.date}</h3>
+      <h2 className="CurrentWeather__time">{props.data.time}</h2>
+      <h3 className="CurrentWeather__date">{props.data.date}</h3>
       <div className="CurrentWeather__columns">
         <div className="CurrentWeather__columns__left">
-          <img className="weatherImg" src={props.data.icon} alt={`${props.data.description}`} />
+          <span className="icon">
+            <i className={`wi wi-owm-${props.data.iconCode}`}></i>
+          </span>
           <div className="CurrentWeather__columns__left__right">
             <p className="temperature">{props.data.temperature}°C</p>
             <p className="weatherDescription">{props.data.description}</p>

@@ -1,4 +1,5 @@
 import "./ForecastItem.css";
+import "../../../assets/weather-icons/css/weather-icons.min.css";
 
 const ForecastItem = (props) => {
   return (
@@ -7,7 +8,9 @@ const ForecastItem = (props) => {
       <p>
         <strong className="time">{props.data.time}</strong>
       </p>
-      <img src={props.data.icon} alt={props.data.description} />
+      <span className="icon" title={props.data.description}>
+        <i className={`wi wi-owm-${props.data.iconCode}`}></i>
+      </span>
       <p className="temperature">{props.data.temperature}°C</p>
     </div>
   );
