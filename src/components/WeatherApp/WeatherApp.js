@@ -40,7 +40,7 @@ const WeatherApp = () => {
 
   useEffect(() => {
     getWeatherCurrentLocation();
-  });
+  }, []);
 
   return weatherData === null ? (
     <h3>
