@@ -22,17 +22,27 @@ export const convertTimeArgOfOwmApiToTime = (input) => {
   const weekday = WEEK_DAYS[time.getDay()];
   const month = MONTHS[time.getMonth()];
   const day = time.getDate();
-  const hour = time.getHours() > 9 ? time.getHours() : `0${time.getHours()}`;
-  const minute =
-    time.getMinutes() > 9 ? time.getMinutes() : `0${time.getMinutes()}`;
+  const hour = time.getHours();
+  const minute = time.getMinutes();
+  const formattedHour = hour > 9 ? hour : `0${hour}`;
+  const formattedMinute = minute > 9 ? minute : `0${minute}`;
 
-  return { year, weekday, month, day, hour, minute };
+  return {
+    year,
+    weekday,
+    month,
+    day,
+    hour,
+    minute,
+    formattedHour,
+    formattedMinute,
+  };
 };
 
 export const getTimeFromOwmApi = (owmApiReturnedObj) => {
   const dtObj = convertTimeArgOfOwmApiToTime(owmApiReturnedObj.dt);
   const date = `${dtObj.weekday}, ${dtObj.month} ${dtObj.day} ${dtObj.year}`;
-  const time = `${dtObj.hour}:${dtObj.minute}`;
+  const time = `${dtObj.formattedHour}:${dtObj.formattedMinute}`;
 
   const sunriseAtObj = convertTimeArgOfOwmApiToTime(
     owmApiReturnedObj.sys.sunrise
@@ -76,13 +86,14 @@ export const getCurrentWeather = async (
   lat = null,
   lon = null
 ) => {
-  let end_point;
+  let query;
   if (location.trim() !== "" && lat === null && lon === null) {
-    end_point = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${API_KEY}&units=metric`;
+    query = `q=${location}`;
   } else if (location.trim() === "" && lat !== null && lon !== null) {
-    end_point = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`;
+    query = `lat=${lat}&lon=${lon}`;
   }
 
+  const end_point = `https://api.openweathermap.org/data/2.5/weather?${query}&appid=${API_KEY}&units=metric`;
   const response = await fetch(end_point);
   const data = await response.json();
 
@@ -108,12 +119,14 @@ export const getWeatherForecast = async (
   lat = null,
   lon = null
 ) => {
-  let end_point;
+  let query;
   if (location.trim() !== "" && lat === null && lon === null) {
-    end_point = `https://api.openweathermap.org/data/2.5/forecast?q=${location}&appid=${API_KEY}&units=metric&cnt=6`;
+    query = `q=${location}`;
   } else if (location.trim() === "" && lat !== null && lon !== null) {
-    end_point = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric&cnt=6`;
+    query = `lat=${lat}&lon=${lon}`;
   }
+
+  const end_point = `https://api.openweathermap.org/data/2.5/forecast?${query}&appid=${API_KEY}&units=metric&cnt=6`;
 
   const response = await fetch(end_point);
   const data = await response.json();
@@ -130,5 +143,9 @@ export const getWeatherForecast = async (
     });
   });
 
-  return forecast
+  return forecast;
+};
+
+export const convertFromCelsiusToFahrenheit = (input) => {
+  return Math.round(input * 1.8 + 32);
 };

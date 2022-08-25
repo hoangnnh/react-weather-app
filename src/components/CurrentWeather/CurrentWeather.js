@@ -2,8 +2,13 @@ import React from "react";
 
 import "./CurrentWeather.css";
 import "../../assets/weather-icons/css/weather-icons.min.css";
+import { convertFromCelsiusToFahrenheit } from "../../helpers";
 
 const CurrentWeather = (props) => {
+  const temperatureValue = props.isCelsiusUnit
+    ? props.data.temperature
+    : convertFromCelsiusToFahrenheit(props.data.temperature);
+  const temperatureUnit = props.isCelsiusUnit ? "C" : "F";
   return (
     <div className="CurrentWeather">
       <h1 className="CurrentWeather__location">{props.data.location}</h1>
@@ -15,7 +20,9 @@ const CurrentWeather = (props) => {
             <i className={`wi wi-owm-${props.data.iconCode}`}></i>
           </span>
           <div className="CurrentWeather__columns__left__right">
-            <p className="temperature">{props.data.temperature}°C</p>
+            <p className="temperature">
+              {temperatureValue}°{temperatureUnit}
+            </p>
             <p className="weatherDescription">{props.data.description}</p>
           </div>
         </div>
