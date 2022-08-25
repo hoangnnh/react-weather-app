@@ -47,12 +47,12 @@ export const getTimeFromOwmApi = (owmApiReturnedObj) => {
   const sunriseAtObj = convertTimeArgOfOwmApiToTime(
     owmApiReturnedObj.sys.sunrise
   );
-  const sunriseAt = `${sunriseAtObj.hour}:${sunriseAtObj.minute}`;
+  const sunriseAt = `${sunriseAtObj.formattedHour}:${sunriseAtObj.formattedMinute}`;
 
   const sunsetAtObj = convertTimeArgOfOwmApiToTime(
     owmApiReturnedObj.sys.sunset
   );
-  const sunsetAt = `${sunsetAtObj.hour}:${sunsetAtObj.minute}`;
+  const sunsetAt = `${sunsetAtObj.formattedHour}:${sunsetAtObj.formattedMinute}`;
 
   return {
     date,
