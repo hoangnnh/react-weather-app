@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
 import {
-  getCurrentWeatherByCityName,
-  getCurrentWeatherByCoords,
+  getCurrentWeather,
   getMyLocationCoord,
-  getWeatherForecastByCityName,
-  getWeatherForecastByCoords,
+  getWeatherForecast,
 } from "../../helpers";
 
 import CurrentWeather from "../CurrentWeather/CurrentWeather";
@@ -17,24 +15,26 @@ const WeatherApp = () => {
   const [location, setLocation] = useState("");
   const [weatherData, setWeatherData] = useState(null);
 
-  const getWeatherData = async (event) => {
-    event.preventDefault();
+  const getWeatherData = async () => {
+    const current = await getCurrentWeather(location);
+    const forecast = await getWeatherForecast(location);
 
-    const currentWeather = await getCurrentWeatherByCityName(location);
-    const weatherForecast = await getWeatherForecastByCityName(location);
-
-    setWeatherData({ current: currentWeather, forecast: weatherForecast });
+    setWeatherData({ current: current, forecast: forecast });
   };
 
   const getWeatherCurrentLocation = async () => {
     const coords = await getMyLocationCoord();
 
-    const currentWeather = await getCurrentWeatherByCoords(coords);
-    const weatherForecast = await getWeatherForecastByCoords(coords);
+    const current = await getCurrentWeather("", coords.lat, coords.lon);
+    const forecast = await getWeatherForecast(
+      "",
+      coords.lat,
+      coords.lon
+    );
 
     setWeatherData({
-      current: currentWeather,
-      forecast: weatherForecast,
+      current: current,
+      forecast: forecast,
     });
   };
 
@@ -55,7 +55,10 @@ const WeatherApp = () => {
         onChange={(event) => {
           setLocation(event.target.value);
         }}
-        onSubmit={getWeatherData}
+        onSubmit={(event) => {
+          event.preventDefault();
+          getWeatherData();
+        }}
         onGetWeatherCurrentLocation={getWeatherCurrentLocation}
       />
       <CurrentWeather data={weatherData.current} />
