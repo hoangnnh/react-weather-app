@@ -1,6 +1,3 @@
-[submodule "src/assets"] 
-  path = 'src/assets'
+[submodule "src/assets/weather-icons"] 
+  path = src/assets/weather-icons
   url = https://github.com/erikflowers/weather-icons
-[submodule "weather-icons"]
-	path = weather-icons
-	url = https://github.com/erikflowers/weather-icons
