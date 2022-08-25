@@ -13,7 +13,7 @@ const MONTHS = [
   "Nov",
   "Dec",
 ];
-const API_KEY = "08dbab0eeefe53317d2e0ad7c2a2e060";
+const API_KEY = process.env.REACT_APP_OWM_API_KEY;
 
 export const convertDtFromOwmApiToDate = (dt) => {
   const time = new Date(dt * 1000);
