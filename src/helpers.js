@@ -63,22 +63,20 @@ export const getTimeFromOwmApi = (owmApiReturnedObj) => {
 };
 
 export const getMyLocationCoord = async () => {
-  const getLocation = () =>
-    new Promise((resolve, reject) => {
-      window.navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const location = {
-            lat: position.coords.latitude,
-            lon: position.coords.longitude,
-          };
-          resolve(location);
-        },
-        (err) => reject(err)
-      );
-    });
-  const data = getLocation();
-
-  return data;
+  return new Promise((resolve, reject) => {
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        resolve({
+          lat: pos.coords.latitude,
+          lon: pos.coords.longitude,
+        });
+      },
+      (err) => {
+        alert(err.message);
+      },
+      { enableHighAccuracy: true }
+    );
+  });
 };
 
 export const getCurrentWeather = async (
